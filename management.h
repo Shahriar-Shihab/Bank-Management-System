@@ -50,8 +50,8 @@ void clrbuffer(void)                                                            
 void openingWindow(){                                                            // 1
     clear_screen();
     printf ("\nChoose what suits you best\n\n");
-    printf ("Press 1 if Employee\n");
-    printf ("Press 2 if Customer\n");
+    printf ("Press 1: Employee Login\n");
+    printf ("Press 2: Customer Login\n");
     int err=0;
     do{
         fflush(stdin);
@@ -67,7 +67,9 @@ void openingWindow(){                                                           
                 customer_register_and_login();
             break;
             default :
-                printf("Invalid\nPlease Enter 1 or 2\n");
+                printf ("Invalid Input!\n\n");
+                printf("Press 1: Employee Login\n");
+                printf("Press 2: Customer Login\n");
                 if(err==4){
                   clear_screen();
                   printf ("\n\nTried too much. Do you want to exit..?\n");
@@ -372,7 +374,14 @@ void create_account(acc accounts[])
     fprintf(fptr_accinfo, "Balance: $ %.0f\n", accounts[index].balance);
     fprintf(fptr_accinfo, "Password: %s\n", accounts[index].password);
     clear_screen();
-    printf("Account created successfully!");
+    printf("Account created successfully!\n\n");
+
+    printf("Account Number: %d\n", accounts[index].account_number);
+    printf("Account Holder's Name: %s\n", accounts[index].name);
+    printf("House Address: %s\n", accounts[index].address);
+    printf("E-Mail: %s\n", accounts[index].email);
+    printf("Balance: $ %.0f\n", accounts[index].balance);
+    printf("Password: %s\n\n\n", accounts[index].password);
 
     fclose(fptr_accinfo);
 
@@ -1008,6 +1017,11 @@ void login() {
         {
             customer_register_and_login();
         }
+        else
+        {
+            printf("Invalid account number or password. Try again\n");
+            login();
+        }
     }
 }
 
@@ -1321,14 +1335,3 @@ void account_greater_than_certain_amount(acc accounts[])
     fclose(fptr_total_accounts);
     exitOrMenu();
 }
-
-
-
-
-
-
-
-
-
-
-
